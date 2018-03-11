@@ -51,6 +51,7 @@ mongoose.connect(dbURL, err => {
 });
 require('./models/list.model');
 require('./models/todo.model');
+require('./models/user.model');
 
 
 // error handler

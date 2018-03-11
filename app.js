@@ -4,10 +4,17 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const cors = require('cors')
+const FB = require('fb');
+const dbURL = 'mongodb://localhost:27017/todo-fancy';
+const db = mongoose.connection;
 require('dotenv').config();
 
 const index = require('./routes/index');
 const users = require('./routes/users');
+const lists = require('./routes/lists');
+const todos = require('./routes/todos');
 
 const app = express();
 
@@ -26,6 +33,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
+app.use('/lists', lists);
+app.use('/todos', todos);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -33,6 +42,16 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
+
+mongoose.connect(dbURL, err => {
+  if(!err)
+      console.log('Connected to database');
+  else
+      console.log('Error Connect to database');
+});
+require('./models/list.model');
+require('./models/todo.model');
+
 
 // error handler
 app.use(function(err, req, res, next) {

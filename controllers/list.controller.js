@@ -2,6 +2,7 @@ const List = require('../models/list.model');
 
 module.exports = {
     create: (req, res) => {
+        req.body.user = req.decoded.id;
         List.create(req.body, (err, data) => {
             if (err) {
                 console.log(err);
@@ -16,7 +17,9 @@ module.exports = {
         })
     },
     findAll: (req, res) => {
-        List.find()
+        List.find({
+            user: req.decoded.id
+        })
             .populate('todo')
             .exec()
             .then((data) => {

@@ -15,6 +15,7 @@ const index = require('./routes/index');
 const users = require('./routes/users');
 const lists = require('./routes/lists');
 const todos = require('./routes/todos');
+const { auth } = require('./middlewares/auth');
 
 const app = express();
 
@@ -33,28 +34,29 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
-app.use('/lists', lists);
-app.use('/todos', todos);
+app.use('/lists', auth, lists);
+app.use('/todos', auth, todos);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
 mongoose.connect(dbURL, err => {
-  if(!err)
-      console.log('Connected to database');
+  if (!err)
+    console.log('Connected to database');
   else
-      console.log('Error Connect to database');
+    console.log('Error Connect to database');
 });
 require('./models/list.model');
 require('./models/todo.model');
+require('./models/user.model');
 
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

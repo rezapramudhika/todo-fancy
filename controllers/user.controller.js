@@ -29,7 +29,7 @@ module.exports = {
                 if (data) {
                     let check = bcrypt.compareSync(req.body.password, data.password);
                     if (check) {
-                        let token = jwt.sign({ id: data.id, email: data.email, name: data.name }, 'secret-ui');
+                        let token = jwt.sign({ id: data.id, email: data.email, name: data.name }, process.env.SECRETKEY);
                         res.status(200).json({
                             message: 'Signin success',
                             user: {

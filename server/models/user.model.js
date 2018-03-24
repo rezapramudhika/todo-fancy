@@ -13,6 +13,7 @@ const userSchema = new Schema({
     },
     password: String,
     name: String,
+    facebookId: String,
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }
 });

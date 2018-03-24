@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand:400,500,700');
+
+body {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.sign-in-container {
+    margin: 50px auto;
+    width: 550px;
+    border-width: 0 0 2px;
+    border-color: black;
+    border: 1px solid black;
+    border-radius: 4px
+}
+
+.btn-sign-in {
+    margin-bottom: 30px;
+}
+
+.modal-footer-login {
+	position: relative;
+}
+
+.modal-footer-login p{
+	margin-top: 10px;
+}
+
+.line-through {
+    border-top: 1px solid #ddd;
+    margin: 30px 0;
+    position: relative;
+    text-align: center;
+}
+
+.fb-login {
+    margin: 0 auto;
+    margin-bottom: 30px;
+}
+
+.line-through span {
+    background: #fff;
+    padding: 0 10px;
+}
+
+.line-through p {
+    position: absolute;
+    text-align: center;
+    top: -8px;
+	width: 100%;
+	font-size: 10px;
+	margin: 0 0 10px;
+}
+
+.muted {
+    color: #999;
+}
+
+@media (max-width: 450px){
+	.sign-in-container {
+        margin: 0 auto;
+        width: 250px;
+    }
+}
+
+ul {
+    display: inline !important;
+}
+
+.edit-btn {
+    color: white;
+    margin-right: 10px;
+}
+
+h3 {
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.text-centered {
+    text-align: center;
+}
+
+.grey {
+    background-color: rgb(226, 226, 226); 
+}
+
+.pointer:hover {
+    cursor: pointer;
+}
+
+.navbar-default-bottom {
+    background-color: #337ab7;
+    color: white;
+}
+
+.navbar-default-bottom h4{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+h4 {
+    font-size: 16px;
+}
+
+.red {
+    color: rgb(250, 69, 69);
+}
+
+.yellow {
+    color: rgb(245, 231, 35);
+}

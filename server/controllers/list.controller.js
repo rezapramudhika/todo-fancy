@@ -21,6 +21,9 @@ module.exports = {
             user: req.decoded.id
         })
             .populate('todo')
+            .sort({createdAt: 'desc'})
+            .populate('user')
+            .sort({createdAt: 'desc'})
             .exec()
             .then((data) => {
                 res.status(200).json({

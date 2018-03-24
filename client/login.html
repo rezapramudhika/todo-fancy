@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <div id="login" class="container sign-in-container">
+        <h3 class="form-signin-heading text-centered">Todo App Fancy</h3>
+        <div class="form-group">
+            <label for="inputEmail">Email address</label>
+            <input type="email" class="form-control" id="inputEmail" v-model="email" required autofocus>
+        </div>
+        <div class="form-group">
+            <label for="inputPassword">Password</label>
+            <input type="password" class="form-control" id="inputPassword" v-model="password" required>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block btn-sign-in" @click="login()">Sign in</button>
+        <p class="text-centered">New member?
+            <a href="#" data-toggle="modal" data-target="#register-modal">Register</a> here</p>
+        <div class="line-through">
+            <p>
+                <span class="muted">or connect to your social media</span>
+            </p>
+        </div>
+        <div class="fb-login text-centered">
+            <div class="fb-login-button" scope="public_profile,email" data-max-rows="1" data-size="medium" data-button-type="continue_with"
+                data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" onlogin="checkLoginState();"></div>
+        </div>
+        <div class="modal fade" id="register-modal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4>Register new account</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="inputRegisterName">Name</label>
+                            <input type="text" class="form-control" id="inputRegisterName" v-model="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputRegisterEmail">Email address</label>
+                            <input type="email" class="form-control" id="inputRegisterEmail" v-model="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputRegisterPassword">Password</label>
+                            <input type="password" class="form-control" id="inputRegisterPassword" v-model="password" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info" @click="register">Register</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.15/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+    crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
+<link rel="stylesheet" href="styles.css">
+<script src="facebook-login.js"></script>
+<script src="login.js"></script>
+
+</html>

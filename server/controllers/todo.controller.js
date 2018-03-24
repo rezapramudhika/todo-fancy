@@ -16,7 +16,7 @@ module.exports = {
                 .exec()
                 .then((list) => {
                     let updateTodo = list.todo;
-                    updateTodo.push(data._id)
+                    updateTodo.unshift(data._id)
                     List.findByIdAndUpdate(req.params.listId, {
                         todo: updateTodo,
                     }, { new: true }, (err) => {

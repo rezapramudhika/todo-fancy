@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors')
 const FB = require('fb');
-const dbURL = 'mongodb://localhost:27017/todo-fancy';
+const dbURL = 'mongodb://rezapramudhika:lXmCsLlPFuKsQH8m@rezapramudhika-shard-00-00-cik85.mongodb.net:27017,rezapramudhika-shard-00-01-cik85.mongodb.net:27017,rezapramudhika-shard-00-02-cik85.mongodb.net:27017/todo-fancy?ssl=true&replicaSet=rezapramudhika-shard-0&authSource=admin';
 const db = mongoose.connection;
 require('dotenv').config();
 

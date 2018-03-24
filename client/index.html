@@ -1,14 +1,137 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <script src="main.js"></script>
 </head>
+
 <body>
-    
+    <div id="app">
+        <navbar-component :token='token' :username='username'></navbar-component>
+        <!-- <list-component 
+        :username='username' 
+        :lists='lists' 
+        v-on:setListId='listenListId'
+        v-on:setListName='listenListName'
+        :listname='listname'
+        :listid='listid'></list-component> -->
+        <div class="container">
+            <div class="text-centered">
+                <h3>Hello,
+                    <Strong>{{username}}</Strong>
+                </h3>
+            </div>
+            <div class="list-group" v-for="(list, indexList) in lists">
+                <li class="list-group-item active">
+                    {{list.title}}
+                    <span class="glyphicon glyphicon-trash pull-right pointer" @click="deleteList(list._id, list.title)"></span>
+                    <a href="#" data-toggle="modal" data-target="#edit-list-modal" @click="setListId(list._id), setListName(list.title)">
+                        <span class="glyphicon glyphicon-edit pull-right edit-btn"></span>
+                    </a>
+                </li>
+                <li class="list-group-item" v-for="(todo, indexTodo) in list.todo">
+                    <span class="glyphicon glyphicon-star-empty pointer yellow" v-if="!todo.starred" @click="starredHandler(indexList, indexTodo, todo._id)"></span>
+                    <span class="glyphicon glyphicon-star pointer yellow" v-else @click="starredHandler(indexList, indexTodo, todo._id)"></span>
+                    <span class="glyphicon glyphicon-unchecked pointer" v-if="!todo.checked" @click="checkedHandler(indexList, indexTodo, todo._id)"></span>
+                    <span class="glyphicon glyphicon-check pointer" v-else @click="checkedHandler(indexList, indexTodo, todo._id)"></span>
+                    <a>{{todo.todo}}</a>
+                    <span class="glyphicon glyphicon-trash pull-right pointer red" @click="deleteTodo(todo._id, todo.todo)"></span>
+                </li>
+                <li class="list-group-item text-centered grey">
+                    <a href="#" data-toggle="modal" data-target="#add-activity-modal" @click="setListId(list._id)">
+                        <span class="glyphicon glyphicon-plus-sign"></span> Add new activity</a>
+                </li>
+            </div>
+        </div>
+        <!-- <create-todo-component v-on:createTodo='listenListId' :listid='listid'></create-todo-component> -->
+        <div class="modal fade" id="add-activity-modal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4>Add new activity</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="activity">Activity</label>
+                            <input type="text" class="form-control" id="activity">
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="starred" /> Starred
+                            </label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" @click="createTodo">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="edit-list-modal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4>Edit list</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="editList">List Name</label>
+                            <input type="text" class="form-control" id="editList" v-model="listname">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" @click="editList">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <create-list-component></create-list-component>
+        <!-- <div class="modal fade" id="create-list-modal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4>Create list</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="createList">List Name</label>
+                            <input type="text" class="form-control" id="createList">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" @click="createList">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <div class="navbar navbar-default-bottom navbar-fixed-bottom pointer text-centered" href="#" data-toggle="modal" data-target="#create-list-modal">
+            <h4>Create new List</h4>
+        </div>
+    </div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.15/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+    crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
+<link rel="stylesheet" href="styles.css">
+<script src="navbar.component.js"></script>
+<script src="list.component.js"></script>
+<script src="create-list.component.js"></script>
+<script src="create-todo.component.js"></script>
+<script src="app.js"></script>
+
 </html>

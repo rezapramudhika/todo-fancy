@@ -8,7 +8,7 @@ new Vue({
     },
     methods: {
         login: function () {
-            axios.post('https://68598ba2.ngrok.io/users/login', {
+            axios.post('https://todo-server.rezapramudhika.com/users/login', {
                 email: this.email,
                 password: this.password
             })
@@ -22,7 +22,7 @@ new Vue({
                 })
         },
         register: function () {
-            axios.post('https://68598ba2.ngrok.io/users/register', {
+            axios.post('https://todo-server.rezapramudhika.com/users/register', {
                 name: this.name,
                 email: this.email,
                 password: this.password

@@ -1,5 +1,5 @@
 const request = axios.create({
-    baseURL: 'https://68598ba2.ngrok.io',
+    baseURL: 'https://todo-server.rezapramudhika.com',
     headers: { 'token': localStorage.getItem('token') }
 })
 
@@ -107,7 +107,7 @@ new Vue({
             window.location.href = 'login.html';
         } else {
             this.token = localStorage.getItem('token');
-            axios.get('https://68598ba2.ngrok.io/lists/', {
+            axios.get('https://todo-server.rezapramudhika.com/lists/', {
                 headers: { token: this.token }
             })
                 .then((response) => {

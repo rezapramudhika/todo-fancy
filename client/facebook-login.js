@@ -67,7 +67,7 @@ function testAPI() {
   FB.api('/me', { fields: ['id', 'name', 'email', 'address', 'picture.width(150).height(150)'] }, function (response) {
     console.log('Successful login for: ' + response.name);
     console.log(response)
-    axios.post('https://68598ba2.ngrok.io/users/loginfb', {
+    axios.post('https://todo-server.rezapramudhika.com/users/loginfb', {
       facebookId: response.id,
       email: response.email,
       username: response.name,
